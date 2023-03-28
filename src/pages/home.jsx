@@ -1,14 +1,22 @@
+import { SendSVG } from "../components/icons";
+
 export default function HomePage() {
   return (
     <div className=" p-4 rounded-lg   max-w-4xl mx-auto ">
       <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full pb-9 px-5  max-w-4xl">
         <div className="flex items-center rounded-lg border bg-white border-gray-400 pl-3 pr-1  py-1">
-          <input
+          <textarea
             type="text"
             placeholder="Type a prompt"
             className="w-full focus:outline-none"
-          />
-          <button className="bg-blue-600 flex items-center justify-center font-bold py-1 h-9 w-14 text-center px-4 ml-2 rounded"></button>
+            cols="30"
+            rows="10"
+          ></textarea>
+
+          <button className="bg-blue-600 flex items-center justify-center font-bold py-1 h-9 w-14 text-center px-4 ml-2 rounded">
+            {" "}
+            <SendSVG />
+          </button>
         </div>
       </div>
       <div className=" p-4 rounded-lg text-center my-4 flex flex-col min-h-full bg-white">
