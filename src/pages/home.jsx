@@ -1,4 +1,4 @@
-import { SendSVG, CopySVG, LoadingSVG } from "../components/icons";
+import {  CopySVG, LoadingSVG } from "../components/icons";
 import { functions } from "../service/firebase";
 import { useState } from "react";
 import Navbar from "./navbar";

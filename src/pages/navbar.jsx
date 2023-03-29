@@ -1,3 +1,5 @@
+import {  Link } from "react-router-dom";
+
 export default function Navbar() {
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded max-w-6xl  mx-auto">
@@ -24,7 +26,19 @@ export default function Navbar() {
         <h2 className="font-bold mb-2 text-2xl">
           Translator and Grammar Fixer
         </h2>
-        <div className="flex items-center md:order-2">powered by OpenAI</div>
+        <div className="flex items-center md:order-2">
+          <Link to={`/`}>
+            <div className="text-gray-600 hover:text-indigo-600 hover:text-green-500 px-4 py-2 text-lg">
+              Tool
+            </div>
+          </Link>
+          <Link to={`/history`}>
+            <div className="text-gray-600 hover:text-indigo-600 hover:text-green-500 px-4 py-2 text-lg">
+              History
+            </div>
+          </Link>
+
+        </div>
       </div>
     </nav>
   );
