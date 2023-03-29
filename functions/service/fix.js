@@ -1,4 +1,6 @@
 const openai = require("./openaiconfig");
+const admin = require("firebase-admin");
+admin.initializeApp();
 
 exports.fixEveryThing = (prompt) => {
   return new Promise(async (resolve, reject) => {
@@ -7,9 +9,14 @@ exports.fixEveryThing = (prompt) => {
       input: prompt,
       instruction: "translate to english and fix grammer",
     };
-    console.log(prompt);
 
     const response = await openai.createEdit(request);
-    resolve(response.data.choices[0].text);
+    const res = response.data.choices[0].text;
+    admin
+      .firestore()
+      .collection("generates")
+      .add({ response: res, time: new Date().toDateString() });
+
+    resolve(res);
   });
 };
