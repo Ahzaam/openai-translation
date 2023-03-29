@@ -5,7 +5,7 @@ export function LoadingSVG() {
       width="16"
       height="17"
       viewBox="0 0 135 140"
-      fill="#fff"
+      fill="#00000"
     >
       <rect y="10" width="15" height="120" rx="6">
         <animate

@@ -3,11 +3,9 @@ const openai = require("./openaiconfig");
 exports.fixEveryThing = (prompt) => {
   return new Promise(async (resolve, reject) => {
     const request = {
-      model: "gpt-3.5-turbo",
-      max_tokens: 2048,
-      messages: [{ role: "user", prompt }],
-
-      temperature: 0.8,
+      model: "text-davinci-edit-001",
+      input: prompt,
+      instruction: "translate to english and fix grammer",
     };
     console.log(prompt);
 
