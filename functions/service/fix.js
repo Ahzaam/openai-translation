@@ -7,16 +7,27 @@ exports.fixEveryThing = (prompt) => {
     const request = {
       model: "text-davinci-edit-001",
       input: prompt,
-      instruction: "translate to english and fix grammer",
+      instruction: "translate to english and fix grammer ",
     };
 
     const response = await openai.createEdit(request);
     const res = response.data.choices[0].text;
+
+    const sum_request = {
+      model: "gpt-3.5-turbo",
+      messages: [
+        { role: "user", content: `"${res}"  + summarize the paragraph` },
+      ],
+    };
+
+    const sum_response = await openai.createChatCompletion(sum_request);
+    const sum_res = sum_response.data.choices[0].message.content;
+
     admin
       .firestore()
       .collection("generates")
-      .add({ response: res, time: new Date().toDateString() });
+      .add({ response: sum_res, time: new Date().toDateString() });
 
-    resolve(res);
+    resolve(sum_res);
   });
 };

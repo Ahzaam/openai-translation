@@ -122,21 +122,7 @@ export default function HomePage() {
                   </p>
                 </div>
                 {/* COPY BUTTON */}
-                <div
-                  className="text-right mt-2"
-                  onClick={(e) => {
-                    var text = document.querySelector(
-                      "#captionID-" + ind
-                    ).textContent;
-                    navigator.clipboard.writeText(text);
-                    document.querySelector("#copybtn-" + ind).textContent =
-                      "Copied!";
-                    setTimeout(() => {
-                      document.querySelector("#copybtn-" + ind).textContent =
-                        "Copy";
-                    }, 2000);
-                  }}
-                >
+                <div className="text-right mt-2">
                   <div className="ml-auto w-fit flex  cursor-pointer">
                     <div
                       onClick={() => handleFixAgain(result.prompt)}
@@ -144,7 +130,22 @@ export default function HomePage() {
                     >
                       Regenerate
                     </div>{" "}
-                    <div className="rounded-lg flex bg-gray-200">
+                    <div
+                      className="rounded-lg flex bg-gray-200"
+                      onClick={(e) => {
+                        var text = document.querySelector(
+                          "#captionID-" + ind
+                        ).textContent;
+                        navigator.clipboard.writeText(text);
+                        document.querySelector("#copybtn-" + ind).textContent =
+                          "Copied!";
+                        setTimeout(() => {
+                          document.querySelector(
+                            "#copybtn-" + ind
+                          ).textContent = "Copy";
+                        }, 2000);
+                      }}
+                    >
                       <div
                         id={"copybtn-" + ind}
                         className="pb-2   w-20  py-1 px-3 "
