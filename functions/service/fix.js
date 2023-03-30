@@ -16,7 +16,10 @@ exports.fixEveryThing = (prompt) => {
     const sum_request = {
       model: "gpt-3.5-turbo",
       messages: [
-        { role: "user", content: `"${res}"  + summarize the paragraph` },
+        {
+          role: "user",
+          content: `"${res}"  + summarize in first person view `,
+        },
       ],
     };
 
