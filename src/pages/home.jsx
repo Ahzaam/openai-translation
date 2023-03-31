@@ -3,12 +3,12 @@ import { functions } from "../service/firebase";
 import { useState } from "react";
 import Navbar from "./navbar";
 import "../App.css";
-import Alert from './Alert';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import SettingsIcon from '@mui/icons-material/Settings';
-import ClearIcon from '@mui/icons-material/Clear';
-import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
+import Alert from "./Alert";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import SettingsIcon from "@mui/icons-material/Settings";
+import ClearIcon from "@mui/icons-material/Clear";
+import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 
 export default function HomePage() {
   const [results, setResult] = useState([]);
@@ -32,7 +32,6 @@ export default function HomePage() {
         prompt: prev_prompt,
       })
       .then((response) => {
-
         setResult([...results, { prompt, response: response.data }]);
       })
       .catch(() => {
@@ -51,7 +50,6 @@ export default function HomePage() {
         prompt: prompt,
       })
       .then((response) => {
-
         setResult([...results, { prompt, response: response.data }]);
       })
       .catch(() => {
@@ -59,8 +57,7 @@ export default function HomePage() {
       })
       .finally(() => {
         setLoading(false);
-
-      })
+      });
   };
 
   return (
@@ -70,9 +67,12 @@ export default function HomePage() {
       </div>
 
       <div className=" p-4 rounded-lg   max-w-4xl mx-auto ">
-
-
-        <Alert type="error" message="There was an error processing your request." fetchError={fetchError} setFetchError={setFetchError} />
+        <Alert
+          type="error"
+          message="There was an error processing your request."
+          fetchError={fetchError}
+          setFetchError={setFetchError}
+        />
 
         <div className="fixed bottom-0 z-20 left-1/2 -translate-x-1/2 w-full pb-2 px-5  max-w-4xl">
           <div className=" rounded-lg bg-white border-gray-400  ">
@@ -96,9 +96,12 @@ export default function HomePage() {
               defaultValue="Default Value"
             />
             <div className="flex bg-[#334155] py-2">
-
-              <Button variant="contained" color="inherit" endIcon={!loading ? <SettingsIcon /> : <></>}
-                style={{ marginLeft: '10px' }}
+              <Button
+                variant="contained"
+                color="inherit"
+                className=" transition-all"
+                endIcon={!loading ? <SettingsIcon /> : <></>}
+                style={{ marginLeft: "10px" }}
                 onClick={handleFix}
               >
                 {loading ? <LoadingSVG /> : "Fix Everything"}
@@ -118,23 +121,26 @@ export default function HomePage() {
                 {" "}
                 Fix Grammer
               </button> */}
-              <Button variant="contained" color="inherit" endIcon={<ClearIcon />}
-                style={{ marginLeft: '10px' }}
+              <Button
+                variant="contained"
+                color="inherit"
+                endIcon={<ClearIcon />}
+                style={{ marginLeft: "10px" }}
                 onClick={handleClear}
               >
                 Clear Input
               </Button>
-              <Button variant="contained" color="inherit" endIcon={<DeleteSweepIcon />}
-                style={{ marginLeft: '10px' }}
+              <Button
+                variant="contained"
+                color="inherit"
+                endIcon={<DeleteSweepIcon />}
+                style={{ marginLeft: "10px" }}
                 onClick={() => {
                   setResult([]);
-                  
                 }}
               >
                 Clear Chat
               </Button>
-
-      
             </div>
           </div>
         </div>

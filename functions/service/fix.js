@@ -18,7 +18,7 @@ exports.fixEveryThing = (prompt) => {
       messages: [
         {
           role: "user",
-          content: `Correct grammar and spellings and shorten the given paragraph "${prompt}" `,
+          content: `translate to english and correct grammar and spellings and shorten the given paragraph "${prompt}" `,
         },
       ],
     };
