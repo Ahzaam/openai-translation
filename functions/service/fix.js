@@ -4,21 +4,21 @@ admin.initializeApp();
 
 exports.fixEveryThing = (prompt) => {
   return new Promise(async (resolve, reject) => {
-    const request = {
-      model: "text-davinci-edit-001",
-      input: prompt,
-      instruction: "translate to english and fix grammer ",
-    };
+    // const request = {
+    //   model: "text-davinci-edit-001",
+    //   input: prompt,
+    //   instruction: "translate to english and fix grammer",
+    // };
 
-    const response = await openai.createEdit(request);
-    const res = response.data.choices[0].text;
-
+    // const response = await openai.createEdit(request);
+    // const res = response.data.choices[0].text;
+    console.log(prompt);
     const sum_request = {
       model: "gpt-3.5-turbo",
       messages: [
         {
           role: "user",
-          content: `"${res}"  + summarize in first person view `,
+          content: `Correct grammar and spellings and shorten the given paragraph "${prompt}" `,
         },
       ],
     };

@@ -1,13 +1,23 @@
-import {  CopySVG, LoadingSVG } from "../components/icons";
+import { CopySVG, LoadingSVG } from "../components/icons";
 import { functions } from "../service/firebase";
 import { useState } from "react";
 import Navbar from "./navbar";
 import "../App.css";
+import Alert from './Alert';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import SettingsIcon from '@mui/icons-material/Settings';
+import ClearIcon from '@mui/icons-material/Clear';
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
+
 export default function HomePage() {
   const [results, setResult] = useState([]);
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
+  const [fetchError, setFetchError] = useState(false);
+
   const handleChange = (e) => {
+    setFetchError(false);
     setPrompt(e.target.value);
   };
   const handleClear = () => {
@@ -22,8 +32,14 @@ export default function HomePage() {
         prompt: prev_prompt,
       })
       .then((response) => {
-        setLoading(false);
+
         setResult([...results, { prompt, response: response.data }]);
+      })
+      .catch(() => {
+        setFetchError(true);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -35,9 +51,16 @@ export default function HomePage() {
         prompt: prompt,
       })
       .then((response) => {
-        setLoading(false);
+
         setResult([...results, { prompt, response: response.data }]);
-      });
+      })
+      .catch(() => {
+        setFetchError(true);
+      })
+      .finally(() => {
+        setLoading(false);
+
+      })
   };
 
   return (
@@ -47,9 +70,13 @@ export default function HomePage() {
       </div>
 
       <div className=" p-4 rounded-lg   max-w-4xl mx-auto ">
+
+
+        <Alert type="error" message="There was an error processing your request." fetchError={fetchError} setFetchError={setFetchError} />
+
         <div className="fixed bottom-0 z-20 left-1/2 -translate-x-1/2 w-full pb-2 px-5  max-w-4xl">
-          <div className=" rounded-lg border bg-white border-gray-400  ">
-            <textarea
+          <div className=" rounded-lg bg-white border-gray-400  ">
+            {/* <textarea
               onChange={handleChange}
               type="text"
               value={prompt}
@@ -57,15 +84,25 @@ export default function HomePage() {
               className="w-full  rounded-lg  p-4 text-lg focus:outline-none"
               cols="30"
               rows="3"
-            ></textarea>
+            ></textarea> */}
+            <TextField
+              id="outlined-multiline-static"
+              className="w-full  rounded-lg  p-4 text-lg focus:outline-none"
+              label="Paste Text Here"
+              value={prompt}
+              onChange={handleChange}
+              multiline
+              rows={4}
+              defaultValue="Default Value"
+            />
+            <div className="flex bg-[#334155] py-2">
 
-            <div className="flex bg-blue-600 py-2">
-              <button
+              <Button variant="contained" color="inherit" endIcon={!loading ? <SettingsIcon /> : <></>}
+                style={{ marginLeft: '10px' }}
                 onClick={handleFix}
-                className="bg-gray-50 flex mr-3 w-44 items-center justify-center font-bold py-1 h-9 text-gray-700  text-center px-4 ml-2 rounded"
               >
                 {loading ? <LoadingSVG /> : "Fix Everything"}
-              </button>
+              </Button>
 
               {/* <button
                 onClick={handleFix}
@@ -81,35 +118,34 @@ export default function HomePage() {
                 {" "}
                 Fix Grammer
               </button> */}
-
-              <button
+              <Button variant="contained" color="inherit" endIcon={<ClearIcon />}
+                style={{ marginLeft: '10px' }}
                 onClick={handleClear}
-                className="bg-gray-50 flex items-center justify-center font-bold py-1 h-9 text-gray-700  text-center px-4 ml-2 rounded"
               >
-                {" "}
                 Clear Input
-              </button>
-              <button
+              </Button>
+              <Button variant="contained" color="inherit" endIcon={<DeleteSweepIcon />}
+                style={{ marginLeft: '10px' }}
                 onClick={() => {
                   setResult([]);
-                  setPrompt("");
+                  
                 }}
-                className="bg-gray-50 flex items-center justify-center font-bold py-1 h-9 text-gray-700  text-center px-4 ml-2 rounded"
               >
-                {" "}
-                Clear All
-              </button>
+                Clear Chat
+              </Button>
+
+      
             </div>
           </div>
         </div>
         <div
-          className=" p-4 rounded-lg text-center my-4 flex flex-col min-h-full overflow-auto bg-white mb-56"
+          className=" p-4 rounded-lg text-center  my-4 flex flex-col min-h-full overflow-auto bg-white mb-56"
           style={{ minHeight: "70vh" }}
         >
           {results.map((result, ind) => {
             return (
               <div
-                className="bg-gray-50 rounded-lg shadow-md p-4 mb-3 fade-in"
+                className="bg-gray-50 rounded-lg my-8 shadow-md p-4 mb-3 fade-in"
                 key={ind}
               >
                 <div className="flex items-center justify-between bg-gray-100 rounded-md p-3">

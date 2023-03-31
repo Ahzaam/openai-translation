@@ -16,8 +16,8 @@ export default function PreviousResults() {
       <div className="fixed top-0 z-20 left-1/2 -translate-x-1/2 w-full bg-white">
         <Navbar />
       </div>
-      <div className=" p-4 rounded-lg   max-w-4xl mx-auto ">
-        <h1 className="text-xl text-center fixed">Last 50 results</h1>
+      <div className=" p-4 rounded-lg max-w-4xl mx-auto m-16">
+        {/* <h1 className="text-xl text-center fixed">Last 50 results</h1> */}
         <div
           className=" p-4 rounded-lg text-center my-4 flex flex-col min-h-full overflow-auto bg-white "
           style={{ minHeight: "90vh" }}
