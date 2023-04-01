@@ -20,7 +20,7 @@ function Alert({ type, message, fetchError, setFetchError }) {
     <>
       {fetchError && (
         <div
-          className={`${bgColor} ${textColor} px-4 py-2 rounded-md fixed left-2 bottom-10 transform translate-x-4`}
+          className={`${bgColor} ${textColor} px-4 py-2 rounded-md fixed left-2 bottom-10 transform translate-x-4 z-40`}
         >
           {message}
         </div>
