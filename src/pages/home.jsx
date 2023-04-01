@@ -93,7 +93,7 @@ export default function HomePage() {
               onChange={handleChange}
               multiline
               rows={4}
-              defaultValue="Default Value"
+              
             />
             <div className="flex bg-[#334155] py-2">
               <Button
