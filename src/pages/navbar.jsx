@@ -1,4 +1,5 @@
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Typography from '@mui/material/Typography';
 
 export default function Navbar() {
   return (
@@ -20,12 +21,12 @@ export default function Navbar() {
             ></path>
           </svg>
           <span className="self-center mx-4 text-xl font-semibold whitespace-nowrap ">
-            Welcome
+            FireZ
           </span>
         </span>
-        <h2 className="font-bold mb-2 text-2xl">
-          Translator and Grammar Fixer
-        </h2>
+        <Typography variant="h5" gutterBottom>
+        Grammar and Translation Enhancer
+        </Typography>
         <div className="flex items-center md:order-2">
           <Link to={`/`}>
             <div className="text-gray-600 hover:text-indigo-600 hover:text-green-500 px-4 py-2 text-lg">
