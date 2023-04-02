@@ -7,18 +7,22 @@ exports.fixEveryThing = (prompt) => {
     // const request = {
     //   model: "text-davinci-edit-001",
     //   input: prompt,
-    //   instruction: "translate to english and fix grammer",
+    //   instruction: `translate to english and correct grammar and spellings and shorten the paragraph `,
     // };
 
     // const response = await openai.createEdit(request);
-    // const res = response.data.choices[0].text;
-    console.log(prompt);
+    // const sum_res = response.data.choices[0].text;
+
+    // console.log(sum_res);
     const sum_request = {
       model: "gpt-3.5-turbo",
       messages: [
         {
           role: "user",
-          content: `translate to english and correct grammar and spellings and shorten the given paragraph "${prompt}" `,
+          content: `
+           Instruction : Please translate this paragraph into English, correct any grammatical and spelling errors,
+           and shorten it without altering the meaning. Additionally, maintain a formal tone in the paragraph.
+           Pargraph :  "${prompt}" `,
         },
       ],
     };

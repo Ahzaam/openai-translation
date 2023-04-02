@@ -25,8 +25,9 @@ export default function HomePage() {
   };
 
   const handleFixAgain = (prev_prompt) => {
-    if (prompt === "" || loading) return;
+    if (prev_prompt === "" || loading) return;
     setLoading(true);
+    setFetchError(false);
     functions
       .httpsCallable("fix")({
         prompt: prev_prompt,
@@ -45,6 +46,7 @@ export default function HomePage() {
   const handleFix = () => {
     if (prompt === "" || loading) return;
     setLoading(true);
+    setFetchError(false);
     functions
       .httpsCallable("fix")({
         prompt: prompt,
@@ -93,7 +95,7 @@ export default function HomePage() {
               onChange={handleChange}
               multiline
               rows={4}
-              
+
             />
             <div className="flex bg-[#334155] py-2">
               <Button
@@ -167,7 +169,14 @@ export default function HomePage() {
                 <div className="text-right mt-2">
                   <div className="ml-auto w-fit flex  cursor-pointer">
                     <div
-                      onClick={() => handleFixAgain(result.prompt)}
+                      onClick={() => {
+
+                        var text = document.querySelector(
+                          "#captionID-" + ind
+                        ).textContent;
+                        handleFixAgain(text);
+
+                      }}
                       className="pb-2 mx-2 bg-gray-200 rounded-lg  py-1 px-3 "
                     >
                       Regenerate
